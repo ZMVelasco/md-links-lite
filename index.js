@@ -1,8 +1,24 @@
 const validateRoute = require('./validation.js')
-const mdLinks = require('./md-links.js')
+const extractLinks = require('./extractlinks.js')
+const processLinks = require('./main.js')
 
 console.log(validateRoute('/Users/marianavelasco/md-links-lite/package.json'))
 console.log(validateRoute('./README.md'))
 console.log(validateRoute('./sdjhgfhaksj'))
-mdLinks('md-links.js')
-mdLinks('./samplefile.md')
+// extractLinks('extractlinks.js')
+// extractLinks('./samplefile.md')
+extractLinks('./samplefile.md')
+  .then((links) => {
+    console.log('Links in file:', links)
+  })
+  .catch((error) => {
+    console.error('Error extracting links:', error)
+  })
+
+processLinks('./samplefile.md')
+  .then(() => {
+    console.log('The links have been processed')
+  })
+  .catch((error) => {
+    console.error('Error processing links', error)
+  })
