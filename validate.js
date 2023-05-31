@@ -8,6 +8,6 @@ const validateOnlyLink = (linkObj) => {
     })
 }
 
-validateOnlyLink({ href: 'https://www.google.com', text: ' yo controlo tu vida' }).then(res=>{
-    console.log(res);
+validateOnlyLink({ href: 'https://www.google.com', text: ' yo controlo tu vida' }).then(res => {
+  console.log(res)
 })
