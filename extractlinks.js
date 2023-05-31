@@ -10,16 +10,26 @@ const extractLinks = (route) => {
   } else if (path.extname(routeInfo.route) !== '.md') {
     return 'It is not a markdown file' // Case handling when the file isn't .md
   }
-  const regex = /(https?:\/\/[^\s]+)/g
-  return fs.promises.readFile(routeInfo.route, 'utf8')
+  const regex = /<a\s+(?:[^>]*?\s+)?href=(["'])(.*?)\1>(.*?)<\/a>/g
+  return fs.promises
+    .readFile(routeInfo.route, 'utf8')
     .then((data) => {
-      const links = data.match(regex) // Match method already returns an array of the matches
-      // console.log('Links in file:', links)
-      return links
+      const linkObjects = []
+      let match
+      while ((match = regex.exec(data))) {
+        const href = match[2]
+        const text = match[3]
+        linkObjects.push({
+          href,
+          text,
+          file: routeInfo.route
+        })
+      }
+      return linkObjects
     })
     .catch((error) => {
       console.error('There was an error reading file', error)
     })
-} // Integrar texto y ruta
+}
 
 module.exports = extractLinks

@@ -2,7 +2,7 @@ const fetch = require('fetch')
 const extractLinks = require('./extractlinks')
 
 // Creates an HTTP request for each link
-const processLinks = (route) => {
+const mdLinks = (route) => {
   return extractLinks(route)
     .then((links) => {
       const requests = links.map((link) => {
@@ -22,4 +22,4 @@ const processLinks = (route) => {
     })
 }
 
-module.exports = processLinks
+module.exports = mdLinks
