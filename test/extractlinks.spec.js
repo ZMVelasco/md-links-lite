@@ -4,15 +4,30 @@ const extractLinks = require('../extractlinks.js')
 
 describe('extractLinks', () => {
   // Test case for a valid path with markdown file
-  it('should extract links from a valid path with markdown file', async () => {
+  test('should extract links from a valid path with markdown file', async () => {
     const route = 'samplefile.md'
-    const expectedLinks = ['https://jestjs.io/docs/getting-started', 'https://htmlcolorcodes.com/']
+    const expectedLinks = [
+      {
+        file: '/Users/marianavelasco/md-links-lite/samplefile.md',
+        href: 'https://jestjs.io/docs/getting-started',
+        text: 'Jest Documentation'
+      },
+      {
+        file: '/Users/marianavelasco/md-links-lite/samplefile.md',
+        href: 'https://htmlcolorcodes.com/',
+        text: 'HTML Color Codes'
+      },
+      {
+        file: '/Users/marianavelasco/md-links-lite/samplefile.md',
+        href: 'https://exercism.org/',
+        text: 'JavaScript Exercises'
+      }]
     const links = await extractLinks(route)
     expect(links).toEqual(expectedLinks)
   })
 
   // Test case for invalid path
-  it('should return an error message for an invalid path', async () => {
+  test('should return an error message for an invalid path', async () => {
     const route = 'asjdfslh.md'
 
     const links = await extractLinks(route)
@@ -21,7 +36,7 @@ describe('extractLinks', () => {
   })
 
   // Test case for non-markdown file
-  it('should return an error message for a non-markdown file', async () => {
+  test('should return an error message for a non-markdown file', async () => {
     const route = 'main.js'
 
     const links = await extractLinks(route)

@@ -1,5 +1,5 @@
-<a href="https://jestjs.io/docs/getting-started">Jest Documentation</a>
-<a href="https://htmlcolorcodes.com/">HTML Color Codes</a>
-<a href="https://exercism.org/">JavaScript Exercises</a>
+[Jest Documentation](https://jestjs.io/docs/expect)
+[HTML Color Codes](https://htmlcolorcodes.com/)
+[JavaScript Exercises](https://exercism.org/)
 aisjfghrgiñraefkaopwfkaeirjgeiatgheagjoñrefwf
 añklfwkjeeañrfawfwafwrfear 
