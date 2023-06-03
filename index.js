@@ -1,6 +1,6 @@
-const validateRoute = require('./validation.js')
+const validateRoute = require('./requests.js')
 const extractLinks = require('./extractlinks.js')
-const processLinks = require('./main.js')
+const mdLinks = require('./main.js')
 
 console.log(validateRoute('/Users/marianavelasco/md-links-lite/package.json'))
 console.log(validateRoute('./README.md'))
@@ -15,7 +15,15 @@ extractLinks('./samplefile.md')
     console.error('Error extracting links:', error)
   })
 
-processLinks('./samplefile.md')
+extractLinks('emptysamplefile.md')
+  .then((links) => {
+    console.log('Links in file:', links)
+  })
+  .catch((error) => {
+    console.error('Error extracting links:', error)
+  })
+
+mdLinks('./samplefile.md')
   .then(() => {
     console.log('The links have been processed')
   })

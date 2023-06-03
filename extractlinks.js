@@ -1,25 +1,40 @@
-const validateRoute = require('./validation.js')
+const validateRoute = require('./requests.js')
 const fs = require('fs')
 // const fsPromises = require('fs').promises
 const path = require('path')
 
 const extractLinks = (route) => {
-  const routeInfo = validateRoute(route)// Brings the already validated and absolute route
-  if (!routeInfo.exists) {
-    return 'The path does not exist' // Case handling when the path isn't valid/absolute
-  } else if (path.extname(routeInfo.route) !== '.md') {
-    return 'It is not a markdown file' // Case handling when the file isn't .md
-  }
-  const regex = /(https?:\/\/[^\s]+)/g
-  return fs.promises.readFile(routeInfo.route, 'utf8')
-    .then((data) => {
-      const links = data.match(regex) // Match method already returns an array of the matches
-      // console.log('Links in file:', links)
-      return links
-    })
-    .catch((error) => {
-      console.error('There was an error reading file', error)
-    })
-} // Integrar texto y ruta
+  return new Promise((resolve, reject) => {
+    const routeInfo = validateRoute(route)
+    if (!routeInfo.exists) {
+      reject(new Error('The path does not exist'))
+    } else if (path.extname(routeInfo.route) !== '.md') {
+      reject(new Error('It is not a markdown file'))
+    }
+    const regex = /\[(.*?)\]\((.*?)\)/g
+    fs.promises.readFile(routeInfo.route, 'utf8')
+      .then((data) => {
+        const linkObjects = []
+        let match
+        while ((match = regex.exec(data))) {
+          const href = match[2]
+          const text = match[1]
+          linkObjects.push({
+            href,
+            text,
+            file: routeInfo.route
+          })
+        }
+        resolve(linkObjects)
+      })
+      .catch((error) => {
+        reject(error)
+      })
+  })
+}
 
+extractLinks('./samplefile.md')
+  .then((linkObjects) => {
+    console.log(linkObjects)
+  })
 module.exports = extractLinks
