@@ -22,13 +22,9 @@ const validateOneLink = (linkObject) => {
     })
 }
 
-function validateAllLinks (links) {
-  const validatedLinks = links.map(linkObject => {
-    return validateOneLink(linkObject)
-  })
-  return validatedLinks
+const validateAllLinks = (objectsArray) => {
+  const validatedLinks = objectsArray.map(validateOneLink)
+  return Promise.all(validatedLinks)
 }
 
-validateOneLink({ href: 'https://www.google.com/', text: ' Google' }).then(res => {
-  console.log(res)
-})
+module.exports = { validateOneLink, validateAllLinks }
