@@ -1,25 +1,36 @@
-const fetch = require('fetch')
-const extractLinks = require('./extractlinks')
+const validateRoute = require('./pathvalidation.js')
+const { extractLinks } = require('./extractlinks.js')
+const { validateAllLinks } = require('./linkvalidation.js')
 
-// Creates an HTTP request for each link
-const mdLinks = (route) => {
-  return extractLinks(route)
-    .then((links) => {
-      const requests = links.map((link) => {
-        return fetch(link)
-          .then((response) => {
-            console.log(`Link ${link} is valid. Status: ${response.status}`)
-          })
-          .catch((error) => {
-            console.error(`Link ${link} is invalid. Error: ${error.message}`)
-          })
-      })
-
-      return Promise.all(requests)
-    })
-    .catch((error) => {
-      console.error('Error extracting links:', error)
-    })
+const mdLinks = (path, options) => {
+  return new Promise((resolve, reject) => {
+    const linkExtraction = extractLinks(path)
+    if (linkExtraction === 'The path does not exist' || linkExtraction === 'It is not a markdown file') {
+      reject(new Error('Invalid path'))
+    } else if (options.validate) {
+      linkExtraction()
+        .then((links) => {
+          if (options.validate) {
+            return validateAllLinks(links)
+          } else {
+            return links
+          }
+        })
+        .catch((error) => {
+          reject(error)
+        })
+    } else {
+      resolve(linkExtraction)
+    }
+  })
 }
+
+// mdLinks('./samplefile.md', { validate: true })
+//   .then((linkObjects) => {
+//     console.log(linkObjects)
+//   })
+//   .catch((error) => {
+//     console.error(error)
+//   })
 
 module.exports = mdLinks
