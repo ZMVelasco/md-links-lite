@@ -1,39 +1,12 @@
-# Markdown Links
+# Markdown Links ⛓
 
-## Índice
+Markdown is a project created to extract the existing links from a markdown file. It's divided in two main parts (arguments), link extraction, in which the user will get an array of objects, every link found will have its own object with three properties: the url (href), the text of the link and the absolute path in which the link was found. The second part is the link validation, if the options argument is present and set to true, an http request will be performed for each link.
 
-* [1. Preámbulo](#1-preámbulo)
-* [2. Resumen del proyecto](#2-resumen-del-proyecto)
-* [3. Objetivos de aprendizaje](#3-objetivos-de-aprendizaje)
-* [4. Consideraciones generales](#4-consideraciones-generales)
-* [5. Criterios de aceptación mínimos del proyecto](#5-criterios-de-aceptación-mínimos-del-proyecto)
-* [6. Entregables](#6-entregables)
-* [7. Pistas, tips y lecturas complementarias](#8-pistas-tips-y-lecturas-complementarias)
-* [8. Checklist](#9-checklist)
-* [9. Achicando el problema](#10-achicando-el-problema)
+## Markdown
 
-***
+Markdown is a lightweight markup language widely used for formatting and structuring plain text. With its simple syntax, Markdown allows users to easily create well-formatted documents without the need for complex HTML or word processing software. It provides a way to add headings, lists, links, images, and other elements, making it ideal for creating content such as documentation, README files, blog posts, and forum discussions. Markdown's beauty lies in its simplicity, enabling users to focus on the content itself rather than worrying about intricate formatting details.
 
-## 1. Preámbulo
-
-[Markdown](https://es.wikipedia.org/wiki/Markdown) es un lenguaje de marcado
-ligero muy popular entre developers. Es usado en muchísimas plataformas que
-manejan texto plano (GitHub, foros, blogs, ...) y es muy común
-encontrar varios archivos en ese formato en cualquier tipo de repositorio
-(empezando por el tradicional `README.md`).
-
-Estos archivos `Markdown` normalmente contienen _links_ (vínculos/ligas) que
-muchas veces están rotos o ya no son válidos y eso perjudica mucho el valor de
-la información que se quiere compartir.
-
-Dentro de una comunidad de código abierto, nos han propuesto crear una
-herramienta usando [Node.js](https://nodejs.org/), que lea y analice archivos
-en formato `Markdown`, para verificar los links que contengan y reportar
-algunas estadísticas.
-
-![md-links](https://user-images.githubusercontent.com/110297/42118443-b7a5f1f0-7bc8-11e8-96ad-9cc5593715a6.jpg)
-
-## 2. Resumen del proyecto
+## ![Flow Diagram 🎨](https://res.cloudinary.com/dslzbcaxd/image/upload/v1686504286/md-links_2x_ze5c08.png)
 
 En este proyecto crearás una herramienta de línea de comando así como tu
 propia librería (o biblioteca - library) en JavaScript.

@@ -15,6 +15,6 @@ const mdlinks = (route, options) => {
   }
 }
 
-mdlinks('./README.md', { validate: true })
+mdlinks('./samplefile.md', { validate: true })
   .then(response => console.log(response))
   .catch(err => console.log(err))
